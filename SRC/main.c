@@ -12,6 +12,23 @@
 
 #include "../includes/headmaster.h"
 
+void    ft_contenutab(char ***out)
+{
+  int   i;
+  int   k;
+
+  printf("\n OUT \n\n");
+  i = -1;
+  while (out[++i] && (k = -1) < 0)
+  {
+    while (out[i][++k])
+    {
+      printf("i = %d, %s : %d\n", i, out[i][k], k);
+    }
+    printf("-----------------------\n");
+  }
+}
+
 int main(int argc, char *argv[])
 {
   char ***out;

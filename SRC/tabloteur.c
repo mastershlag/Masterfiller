@@ -65,23 +65,6 @@ static char	*ft_strmasterdup(const char *s, int k)
 	return (s2);
 }
 
-void		ft_contenutab(char ***out)
-{
-	int		i;
-	int		k;
-
-	printf("\n OUT \n\n");
-	i = -1;
-	while (out[++i] && (k = -1) < 0)
-	{
-		while (out[i][++k])
-		{
-			printf("i = %d, %s : %d\n", i, out[i][k], k);
-		}
-		printf("-----------------------\n");
-	}
-}
-
 static int	ft_tabcreator(char ***out, int fd, char *file, int k)
 {
 	char	*line;
