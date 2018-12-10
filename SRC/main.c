@@ -10,52 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
+#include "../includes/headmaster.h"
 
-int verif_file(int fd)
+int main(int argc, char *argv[])
 {
-  int i;
-  int nb;
-  int ret;
-  char buff[21];
+  char ***out;
 
-  while(1)
-  {
-    i = -1;
-    nb = 0;
-    ret = read(fd, buff, 21);
-    buff[ret] = '\0';
-    while (buff[++i] != '\0')
-      if (buff[i] == '#')
-      {
-        if(buff[i - 1] == '.' && buff[i + 1] == '.' &&
-          buff[i - 5] == '.' && buff[i + 5] == '.')
-          return (0);
-        nb++;
-      }
-    if(nb != 4 || ret < 20)
-      return (0);
-    if(ret == 20)
-      break ;
-  }
-  return (1);
-}
-
-int main(int argc, char const *argv[])
-{
-  int fd;
-
+  printf("------------WELCOME------------\n\n");
   if (argc == 2)
   {
-    fd = open(argv[1], O_RDONLY);
-    if(!(verif_file(fd)))
-      printf("nope\n");
-    else
-      printf("ok\n");
+    out = ft_tabloteur(argv[1]);
+    ft_contenutab(out);
   }
-  return (0);
+  else
+    printf("tarace\n");
+  printf("------------good------------\n");
+  return 0;
 }

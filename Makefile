@@ -11,21 +11,22 @@
 # **************************************************************************** #
 
 NAME = filler
-SRCS = ./tabloteur.c
-# CC = gcc -Wall -Wextra -Werror
+SRCS = ./SRC/tabloteur.c ./SRC/main.c
+CC = gcc -Wall -Wextra -Werror
 # CFLAGS = -I ./includes/
 OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 		make -C libft/ fclean && make -C libft/
-		gcc -Wall -Wextra -Werror -I libft/includes -o $(OBJ) -c $(SRCS)
-		gcc -o filler $(OBJ) -I libft/includes -L libft/ -lft
+		$(CC) -o $(NAME) $(OBJ) -I libft/includes -L libft/ -lft
 clean:
 		rm -f $(OBJ)
+		make -C libft/ clean
 fclean: clean
 		rm -f $(NAME)
+		make -C libft/ fclean
 re: fclean all
 
 .PHONY: all clean fclean re
