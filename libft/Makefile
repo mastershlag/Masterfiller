@@ -24,14 +24,23 @@ CC = gcc -Wall -Wextra -Werror
 CFLAGS = -I ./includes/
 OBJ = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: intro $(NAME)
+
+intro:
+	@echo "[\c"
 
 $(NAME): $(OBJ)
-		ar rcs $(NAME) $(OBJ)
+	@echo "]"
+	@ar rcs $(NAME) $(OBJ)
+	@echo "LIBFT                      [DONE]"
 clean:
-		rm -f $(OBJ)
+	@rm -f $(OBJ)
 fclean: clean
-		rm -f $(NAME)
+	@rm -f $(NAME)
 re: fclean all
 
-.PHONY: all clean fclean re
+%.o: %.c
+	@echo  ">\c"
+	@$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+.PHONY: all clean fclean re intro

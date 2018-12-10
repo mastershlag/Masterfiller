@@ -16,17 +16,33 @@ CC = gcc -Wall -Wextra -Werror
 CFLAGS = -I ./includes/ -I ./libft/includes/
 OBJ = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: intro $(NAME)
+
+intro:
+	@echo "---------------------------FILLIT----------------------------"
+	@echo "COMPILATION FILLIT_SRC"
+	@echo "[\c"
 
 $(NAME): $(OBJ)
-		make -C libft/ fclean && make -C libft/
-		$(CC) -o $(NAME) $(OBJ) -I libft/includes -L libft/ -lft
+	@echo "]"
+	@echo "FILLIT_SRC                 [DONE]"
+	@echo "COMPILATION LIBFT"
+	@make -C libft/ fclean && make -C libft/
+	@$(CC) -o $(NAME) $(OBJ) -I libft/includes -L libft/ -lft
+	@echo "FILLIT                     [DONE]"
+	@echo "-------------------------------------------------------------"
 clean:
-		rm -f $(OBJ)
-		make -C libft/ clean
+	@rm -f $(OBJ)
+	@make -C libft/ clean
+	@echo "CLEAN                      [DONE]"
 fclean: clean
-		rm -f $(NAME)
-		make -C libft/ fclean
+	@rm -f $(NAME)
+	@make -C libft/ fclean
+	@echo "FCLEAN                     [DONE]"
 re: fclean all
 
-.PHONY: all clean fclean re
+%.o: %.c
+	@echo  ">\c"
+	@$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+.PHONY: all clean fclean re intro
