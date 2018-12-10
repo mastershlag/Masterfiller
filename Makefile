@@ -13,7 +13,7 @@
 NAME = filler
 SRCS = ./SRC/tabloteur.c ./SRC/main.c
 CC = gcc -Wall -Wextra -Werror
-# CFLAGS = -I ./includes/
+CFLAGS = -I ./includes/ -I ./libft/includes/
 OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)

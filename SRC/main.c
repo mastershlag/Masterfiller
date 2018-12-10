@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headmaster.h"
+#include "headmaster.h"
 
 void    ft_contenutab(char ***out)
 {

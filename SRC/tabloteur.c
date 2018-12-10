@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headmaster.h"
+#include "headmaster.h"
 
 static int	ft_verif_file(int fd)
 {
