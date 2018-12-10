@@ -99,9 +99,7 @@ char		***ft_tabloteur(char *file)
 	char	***out;
 	int		fd;
 	int		k;
-	int		flag;
 
-	flag = 1;
 	if ((fd = open(file, O_RDONLY)) <= 0)
 		return (0);
 	if (!(k = ft_verif_file(fd)))
