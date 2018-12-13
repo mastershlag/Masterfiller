@@ -106,6 +106,7 @@ char		***ft_tabloteur(char *file)
 		return (0);
 	if (!(k = ft_verif_file(fd)))
 		return (0);
+	printf("\n\n k =====> %d\n\n", k);
 	close(fd);
 	if (!(out = (char***)malloc(sizeof(char**) * k + 1)))
 		return (0);
