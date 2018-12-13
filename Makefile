@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = filler
-SRCS = ./SRC/tabloteur.c ./SRC/main.c
+SRCS = ./SRC/tabloteur.c ./SRC/main.c ./SRC/solve.c
 CC = gcc -Wall -Wextra -Werror
 CFLAGS = -I ./includes/ -I ./libft/includes/
 OBJ = $(SRCS:.c=.o)

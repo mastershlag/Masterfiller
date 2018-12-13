@@ -31,16 +31,27 @@ void    ft_contenutab(char ***out)
 
 int main(int argc, char *argv[])
 {
+  int i;
+  char **mat;
   char ***out;
 
+  i = 2;
   printf("------------WELCOME------------\n\n");
   if (argc == 2)
   {
     out = ft_tabloteur(argv[1]);
     ft_contenutab(out);
+    mat = init_mat(i);
+    while (!(backtrack(mat, i, out, 'A')))
+    {
+      i++;
+      //TO DO: free mat correctement
+      mat = init_mat(i);
+    }
+    print_mat(mat, i);
   }
   else
     printf("tarace\n");
   printf("------------good------------\n");
-  return 0;
+  return (0);
 }
