@@ -39,7 +39,11 @@ int main(int argc, char *argv[])
   printf("------------WELCOME------------\n\n");
   if (argc == 2)
   {
-    out = ft_tabloteur(argv[1]);
+    if (!(out = ft_tabloteur(argv[1])))
+    {
+      printf("gg bande de fdp\n");
+      return 0;
+    }
     ft_contenutab(out);
     mat = init_mat(i);
     while (!(backtrack(mat, i, out, 'A')))

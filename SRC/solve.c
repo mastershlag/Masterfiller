@@ -168,6 +168,6 @@ int backtrack(char **mat, int mat_size, char ***tetrimimos, char letter)
 		}
 		j = -1;
 	}
-	remove_letter(mat, mat_size, letter);
+	//remove_letter(mat, mat_size, letter);
 	return (0);
 }

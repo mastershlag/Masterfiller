@@ -47,6 +47,8 @@ static char	*ft_strmasterdup(const char *s, int k)
 	int		i;
 
 	i = 0;
+	if (k > 25)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	if (!(s2 = (char*)malloc(sizeof(char) * (i + 1))))
@@ -104,6 +106,7 @@ char		***ft_tabloteur(char *file)
 		return (0);
 	if (!(k = ft_verif_file(fd)))
 		return (0);
+	printf("\n\n k =====> %d\n\n", k);
 	close(fd);
 	if (!(out = (char***)malloc(sizeof(char**) * k + 1)))
 		return (0);
