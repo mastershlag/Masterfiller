@@ -18,7 +18,7 @@ static int	ft_verif_file(int fd)
 	int		nb;
 	int		ret;
 	int		k;
-	char	buff[21];
+	char	buff[22];
 
 	k = 0;
 	while (1)
@@ -28,10 +28,19 @@ static int	ft_verif_file(int fd)
 		ret = read(fd, buff, 21);
 		buff[ret] = '\0';
 		while (buff[++i] != '\0')
-			if (buff[i] == '#' && nb++ > 0)
+		{
+			// printf("i: %d, %c", i, buff[i]);
+			if (buff[i] == '#' && ++nb > 0)
+			{
 				if (buff[i - 1] != '#' && buff[i + 1] != '#' &&
 					buff[i - 5] != '#' && buff[i + 5] != '#')
 					return (0);
+			}
+			// printf("  ret = %d\n", ret);
+		}
+		if (buff[20])
+			if (buff[20] != '\n')
+				return (0);
 		if (nb != 4 || ret < 20)
 			return (0);
 		k++;

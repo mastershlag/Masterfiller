@@ -27,6 +27,7 @@ void    ft_contenutab(char ***out)
 		}
 		printf("-----------------------\n");
 	}
+	printf("|||||||||||||||||||||||\n\n");
 }
 
 int main(int argc, char *argv[])
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
 			ft_putstr("error\n");
 			return (0);
 		}
+		// ft_contenutab(out);
 		mat = init_mat(i);
 		while (!(backtrack(mat, i, out, 'A')))
 		{
