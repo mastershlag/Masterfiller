@@ -16,12 +16,13 @@ CC = gcc -Wall -Wextra -Werror
 CFLAGS = -I ./includes/ -I ./libft/includes/
 OBJ = $(SRCS:.c=.o)
 
-all: intro $(NAME)
+all: .masterstealth $(NAME)
 
-intro:
+.masterstealth:
 	@echo "---------------------------FILLIT----------------------------"
 	@echo "COMPILATION FILLIT_SRC"
 	@echo "[\c"
+	@touch .masterstealth
 
 $(NAME): $(OBJ)
 	@echo "]"
@@ -33,6 +34,7 @@ $(NAME): $(OBJ)
 	@echo "-------------------------------------------------------------"
 clean:
 	@rm -f $(OBJ)
+	@rm -f .masterstealth
 	@make -C libft/ clean
 	@echo "CLEAN                      [DONE]"
 fclean: clean
@@ -45,4 +47,4 @@ re: fclean all
 	@echo  ">\c"
 	@$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
-.PHONY: all clean fclean re intro
+.PHONY: all clean fclean re
