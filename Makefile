@@ -13,7 +13,7 @@
 NAME = fillit
 SRCS = ./SRC/tabloteur.c ./SRC/main.c ./SRC/solve.c ./SRC/tools.c
 CC = gcc -Wall -Wextra -Werror
-CFLAGS = -I ./includes/ -I ./libft/includes/
+CFLAGS = -I ./SRC/ -I ./libft/
 OBJ = $(SRCS:.c=.o)
 
 all: .masterstealth $(NAME)
