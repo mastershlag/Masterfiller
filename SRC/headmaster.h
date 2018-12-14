@@ -17,8 +17,11 @@
 
 typedef struct	s_position
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		i2;
+	int		j2;
+	char	chr;
 }				t_position;
 
 char			***ft_tabloteur(char *file);
