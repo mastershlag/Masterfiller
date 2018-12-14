@@ -12,6 +12,45 @@
 
 #include "headmaster.h"
 
+static int	ft_minus(int i)
+{
+	return (i == 0 ? 0 : i - 1);
+}
+
+static int	ft_plus(int i)
+{
+	return (i == 3 ? 3 : i + 1);
+}
+
+static int	ft_masterchecker(char ***out, int k)
+{
+	int		i;
+	int		j;
+	int		cpt;
+
+	k = -1;
+	while (out[++k] && (j = -1) < 0)
+	{
+		cpt = 0;
+		while (out[k][++j] && (i = -1) < 0)
+			while (out[k][j][++i])
+				if (out[k][j][i] != '.')
+				{
+					if (out[k][ft_minus(j)][i] != '.' && ft_minus(j) != j)
+						cpt++;
+					if (out[k][ft_plus(j)][i] != '.' && ft_plus(j) != j)
+						cpt++;
+					if (out[k][j][ft_minus(i)] != '.' && ft_minus(i) != i)
+						cpt++;
+					if (out[k][j][ft_plus(i)] != '.' && ft_plus(i) != i)
+						cpt++;
+				}
+		if (cpt != 8 && cpt != 6)
+			return (0);
+	}
+	return (1);
+}
+
 static int	ft_verif_file(int fd)
 {
 	int		i;
@@ -28,19 +67,10 @@ static int	ft_verif_file(int fd)
 		ret = read(fd, buff, 21);
 		buff[ret] = '\0';
 		while (buff[++i] != '\0')
-		{
-			// printf("i: %d, %c", i, buff[i]);
-			if (buff[i] == '#' && ++nb > 0)
-			{
-				if (buff[i - 1] != '#' && buff[i + 1] != '#' &&
-					buff[i - 5] != '#' && buff[i + 5] != '#')
-					return (0);
-			}
-			// printf("  ret = %d\n", ret);
-		}
-		if (buff[20])
-			if (buff[20] != '\n')
-				return (0);
+			if (buff[i] == '#')
+				nb++;
+		if (buff[20] && buff[20] != '\n')
+			return (0);
 		if (nb != 4 || ret < 20)
 			return (0);
 		k++;
@@ -126,6 +156,8 @@ char		***ft_tabloteur(char *file)
 		out[k][4] = 0;
 	}
 	if (!(ft_tabcreator(out, fd, file, k)))
+		return (0);
+	if (!(ft_masterchecker(out, k)))
 		return (0);
 	return (out);
 }
