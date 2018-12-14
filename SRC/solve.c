@@ -77,6 +77,22 @@ t_position	search_tetriminos(char **tetriminos)
 	return (position);
 }
 
+void remove_letter(char **mat, int mat_size, char letter)
+{
+	int i;
+	int j;
+
+	i = -1;
+	j = -1;
+	while (++i < mat_size)
+	{
+		while (++j < mat_size)
+			if (mat[i][j] == letter)
+				mat[i][j] = '.';
+		j = -1;
+	}
+}
+
 int 	put_tetriminos(char **mat, int mat_size, char **tetriminos, t_position position, char letter, int pos_i, int pos_j)
 {
 	int i;
@@ -109,6 +125,7 @@ int 	put_tetriminos(char **mat, int mat_size, char **tetriminos, t_position posi
 		i++;
 		i2++;
 	}
+	remove_letter(mat, mat_size, letter);
 	return (0);
 }
 
@@ -128,22 +145,6 @@ void print_mat(char **mat, int mat_size)
 	}
 }
 
-void remove_letter(char **mat, int mat_size, char letter)
-{
-	int i;
-	int j;
-
-	i = -1;
-	j = -1;
-	while (++i < mat_size)
-	{
-		while (++j < mat_size)
-			if (mat[i][j] == letter)
-				mat[i][j] = '.';
-		j = -1;
-	}
-}
-
 int backtrack(char **mat, int mat_size, char ***tetrimimos, char letter)
 {
 	int i;
@@ -159,15 +160,15 @@ int backtrack(char **mat, int mat_size, char ***tetrimimos, char letter)
 	{
 		while (++j < mat_size)
 		{
+			if(mat[i][j] != '.')
+				j++;
 			if ((put_tetriminos(mat, mat_size, *tetrimimos, position, letter, i, j)))
 			{
 				if (backtrack(mat, mat_size, tetrimimos + 1, letter + 1))
 					return (1);
 			}
-			remove_letter(mat, mat_size, letter);
 		}
 		j = -1;
 	}
-	//remove_letter(mat, mat_size, letter);
 	return (0);
 }
