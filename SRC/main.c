@@ -12,29 +12,36 @@
 
 #include "headmaster.h"
 
-void    ft_contenutab(char ***out)
+static void		ft_freetab3(char ***lol)
 {
-	int   i;
-	int   k;
+	int		i;
+	int		j;
 
-	printf("\n OUT \n\n");
 	i = -1;
-	while (out[++i] && (k = -1) < 0)
+	while (lol[++i] && (j = -1) < 0)
 	{
-		while (out[i][++k])
-		{
-			printf("i = %d, %s : %d\n", i, out[i][k], k);
-		}
-		printf("-----------------------\n");
+		while (lol[i][++j])
+			free(lol[i][j]);
+		free(lol[i]);
 	}
-	printf("|||||||||||||||||||||||\n\n");
+	free(lol);
 }
 
-int main(int argc, char *argv[])
+static void		ft_freetab2(char **lol)
 {
-	int i;
-	char **mat;
-	char ***out;
+	int		i;
+
+	i = -1;
+	while (lol[++i])
+		free(lol[i]);
+	free(lol);
+}
+
+int				main(int argc, char *argv[])
+{
+	int		i;
+	char	**mat;
+	char	***out;
 
 	i = 2;
 	if (argc == 2)
@@ -44,15 +51,15 @@ int main(int argc, char *argv[])
 			ft_putstr("error\n");
 			return (0);
 		}
-		// ft_contenutab(out);
 		mat = init_mat(i);
 		while (!(backtrack(mat, i, out, 'A')))
 		{
-			i++;
-			//TO DO: free mat correctement
-			mat = init_mat(i);
+			ft_freetab2(mat);
+			mat = init_mat(++i);
 		}
 		print_mat(mat, i);
+		ft_freetab3(out);
+		ft_freetab2(mat);
 	}
 	else
 		ft_putstr("usage: ./fillit [input file]\n");

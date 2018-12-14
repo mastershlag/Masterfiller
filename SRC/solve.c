@@ -12,7 +12,7 @@
 
 #include "headmaster.h"
 
-char		**init_mat(int mat_size)
+char				**init_mat(int size)
 {
 	int		i;
 	int		j;
@@ -20,18 +20,20 @@ char		**init_mat(int mat_size)
 
 	i = -1;
 	j = -1;
-	mat = (char**)malloc(sizeof(char*) * mat_size);
-	while (++i < mat_size)
+	mat = (char**)malloc(sizeof(char*) * size + 1);
+	mat[size + 1] = 0;
+	while (++i < size)
 	{
-		mat[i] = (char*)malloc(sizeof(char) * mat_size);
-		while (++j < mat_size)
+		mat[i] = (char*)malloc(sizeof(char) * size + 1);
+		while (++j < size)
 			mat[i][j] = '.';
+		mat[i][j] = 0;
 		j = -1;
 	}
 	return (mat);
 }
 
-t_position	search_tetriminos(char **tetriminos)
+static t_position	search_tetriminos(char **tetriminos)
 {
 	int			i;
 	int			j;
@@ -60,23 +62,23 @@ t_position	search_tetriminos(char **tetriminos)
 	return (position);
 }
 
-void		remove_letter(char **mat, int mat_size, char letter)
+static void			remove_letter(char **mat, int size, char letter)
 {
 	int i;
 	int j;
 
 	i = -1;
 	j = -1;
-	while (++i < mat_size)
+	while (++i < size)
 	{
-		while (++j < mat_size)
+		while (++j < size)
 			if (mat[i][j] == letter)
 				mat[i][j] = '.';
 		j = -1;
 	}
 }
 
-int			put_tetriminos(char **mat, int size, char **out, t_position pos)
+static int			ft_insert(char **mat, int size, char **out, t_position pos)
 {
 	int j;
 	int i2;
@@ -100,11 +102,10 @@ int			put_tetriminos(char **mat, int size, char **out, t_position pos)
 		j2 = -1;
 		pos.i2++;
 	}
-	remove_letter(mat, size, pos.chr);
 	return (0);
 }
 
-int			backtrack(char **mat, int mat_size, char ***tetrimimos, char letter)
+int					backtrack(char **mat, int size, char ***out, char letter)
 {
 	int			i;
 	int			j;
@@ -112,20 +113,19 @@ int			backtrack(char **mat, int mat_size, char ***tetrimimos, char letter)
 
 	i = -1;
 	j = -1;
-	if (*tetrimimos == 0)
+	if (*out == 0)
 		return (1);
-	position = search_tetriminos(*tetrimimos);
-	while (++i < mat_size)
+	position = search_tetriminos(*out);
+	while (++i < size)
 	{
-		while (++j < mat_size)
+		while (++j < size)
 		{
-			if (mat[i][j] != '.')
-				j++;
 			position.i2 = i;
 			position.j2 = j;
-			if ((put_tetriminos(mat, mat_size, *tetrimimos, position)))
-				if (backtrack(mat, mat_size, tetrimimos + 1, letter + 1))
+			if ((ft_insert(mat, size, *out, position)))
+				if (backtrack(mat, size, out + 1, letter + 1))
 					return (1);
+			remove_letter(mat, size, position.chr);
 		}
 		j = -1;
 	}
