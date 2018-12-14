@@ -12,16 +12,6 @@
 
 #include "headmaster.h"
 
-static int	ft_minus(int i)
-{
-	return (i == 0 ? 0 : i - 1);
-}
-
-static int	ft_plus(int i)
-{
-	return (i == 3 ? 3 : i + 1);
-}
-
 static int	ft_masterchecker(char ***out, int k)
 {
 	int		i;
