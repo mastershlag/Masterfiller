@@ -16,4 +16,5 @@ char			**init_mat(int mat_size);
 void			print_mat(char **mat, int mat_size);
 int				ft_minus(int i);
 int				ft_plus(int i);
+void			print_mat(char **mat, int mat_size);
 #endif

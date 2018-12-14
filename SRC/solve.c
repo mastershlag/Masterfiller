@@ -129,22 +129,6 @@ int 	put_tetriminos(char **mat, int mat_size, char **tetriminos, t_position posi
 	return (0);
 }
 
-void print_mat(char **mat, int mat_size)
-{
-	int i;
-	int j;
-
-	i = -1;
-	j = -1;
-	while (++i < mat_size)
-	{
-		while (++j < mat_size)
-			ft_putchar(mat[i][j]);
-		ft_putchar('\n');
-		j = -1;
-	}
-}
-
 int backtrack(char **mat, int mat_size, char ***tetrimimos, char letter)
 {
 	int i;

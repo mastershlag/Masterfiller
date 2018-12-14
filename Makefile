@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = fillit
-SRCS = ./SRC/tabloteur.c ./SRC/main.c ./SRC/solve.c
+SRCS = ./SRC/tabloteur.c ./SRC/main.c ./SRC/solve.c ./SRC/tools.c
 CC = gcc -Wall -Wextra -Werror
 CFLAGS = -I ./includes/ -I ./libft/includes/
 OBJ = $(SRCS:.c=.o)
