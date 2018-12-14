@@ -22,7 +22,7 @@ int		ft_plus(int i)
 	return (i == 3 ? 3 : i + 1);
 }
 
-void print_mat(char **mat, int mat_size)
+void	print_mat(char **mat, int mat_size)
 {
 	int i;
 	int j;
