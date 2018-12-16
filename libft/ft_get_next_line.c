@@ -6,7 +6,7 @@
 /*   By: pharatyk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 16:17:08 by pharatyk          #+#    #+#             */
-/*   Updated: 2018/11/29 16:17:13 by pharatyk         ###   ########.fr       */
+/*   Updated: 2018/12/16 10:46:48 by hmoulher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		ft_outer(char **memory, char **line, int fd)
 		if (!(*line = ft_strdup(memory[fd])))
 			return (-1);
 		ft_strdel(&memory[fd]);
-	}	
+	}
 	else if (memory[fd][len] == '\n')
 	{
 		if (!(*line = ft_strsub(memory[fd], 0, len)))
@@ -40,7 +40,7 @@ static int		ft_outer(char **memory, char **line, int fd)
 	return (1);
 }
 
-int		ft_get_next_line(const int fd, char **line)
+int				ft_get_next_line(const int fd, char **line)
 {
 	static char	*memory[FOPEN_MAX];
 	char		buf[BUFF_SIZE + 1];
