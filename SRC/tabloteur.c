@@ -119,6 +119,7 @@ static int	ft_tabcreator(char ***out, int fd, char *file, int k)
 			k++;
 			flag = 0;
 		}
+		free(line);
 	}
 	close(fd);
 	free(line);
