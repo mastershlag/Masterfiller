@@ -20,11 +20,13 @@ char				**init_mat(int size)
 
 	i = -1;
 	j = -1;
-	mat = (char**)malloc(sizeof(char*) * size + 1);
-	mat[size + 1] = 0;
+	if (!(mat = (char**)malloc(sizeof(char*) * size + 1)))
+		return (0);
+	mat[size] = 0;
 	while (++i < size)
 	{
-		mat[i] = (char*)malloc(sizeof(char) * size + 1);
+		if (!(mat[i] = (char*)malloc(sizeof(char) * size + 1)))
+			return (0);
 		while (++j < size)
 			mat[i][j] = '.';
 		mat[i][j] = 0;

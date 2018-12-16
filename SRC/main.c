@@ -37,10 +37,30 @@ static void		ft_freetab2(char **lol)
 	free(lol);
 }
 
+static int		mastermain(int i, char ***out)
+{
+	char	**mat;
+
+	if (!(mat = init_mat(i)))
+	{
+		ft_putstr("error\n");
+		return (0);
+	}
+	while (!(backtrack(mat, i, out, 'A')))
+	{
+		ft_freetab2(mat);
+		if (!(mat = init_mat(++i)))
+			return (0);
+	}
+	print_mat(mat, i);
+	ft_freetab3(out);
+	ft_freetab2(mat);
+	return (1);
+}
+
 int				main(int argc, char *argv[])
 {
 	int		i;
-	char	**mat;
 	char	***out;
 
 	i = 2;
@@ -51,15 +71,11 @@ int				main(int argc, char *argv[])
 			ft_putstr("error\n");
 			return (0);
 		}
-		mat = init_mat(i);
-		while (!(backtrack(mat, i, out, 'A')))
+		if (!(mastermain(i, out)))
 		{
-			ft_freetab2(mat);
-			mat = init_mat(++i);
+			ft_putstr("error\n");
+			return (0);
 		}
-		print_mat(mat, i);
-		ft_freetab3(out);
-		ft_freetab2(mat);
 	}
 	else
 		ft_putstr("usage: ./fillit [input file]\n");
